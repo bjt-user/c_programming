@@ -5,6 +5,21 @@ quitting by pressing enter at the shop_url prompt*/
 #include <stdio.h>
 #include <stdlib.h> /*for EXIT_SUCCESS*/
 
+/*function to delete the line break from a string
+still trying to fully understand this one
+(stackoverflow paste)*/
+void strip(char *s) {
+    char *p2 = s;
+    while(*s != '\0') {
+        if(*s != '\n') {
+            *p2++ = *s++;
+        } else {
+            ++s;
+        }
+    }
+    *p2 = '\0';
+}
+
 int main(void) {
 	char shop_url[255];
 	char order_date[255];
@@ -26,16 +41,16 @@ int main(void) {
 		if (*order_date == '\n') {
 			break;
 		}
-
-		printf("%s", shop_url);
-		printf("%s", order_date);
-		fprintf(table, "%s", &shop_url);
-		fprintf(table, "%s", &order_date);
+		
+		strip(shop_url);
+		strip(order_date);
+		printf("%s; ", shop_url);
+		printf("%s\n", order_date);
+		fprintf(table, "%s; ", &shop_url);
+		fprintf(table, "%s\n", &order_date);
 
 	}
 	
 	fclose(table);
 	return EXIT_SUCCESS;
 }
-
-/*next step is to get all data of a record in one line and seperated with semicolons*/
