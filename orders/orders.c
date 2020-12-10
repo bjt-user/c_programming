@@ -16,7 +16,8 @@ void strip(char *s) {
     char *p2 = s;
     while(*s != '\0') {
         if(*s != '\n') {
-            *p2++ = *s++;
+            *p2++;
+	    *s++;
         } else {
             *s++;
         }
