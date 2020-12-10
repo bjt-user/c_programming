@@ -7,14 +7,14 @@ quitting by pressing enter at the shop_url prompt*/
 
 /*function to delete the line break from a string
 still trying to fully understand this one
-(stackoverflow paste)*/
+(adjusted stackoverflow paste)*/
 void strip(char *s) {
     char *p2 = s;
     while(*s != '\0') {
         if(*s != '\n') {
             *p2++ = *s++;
         } else {
-            s++;
+            *s++;
         }
     }
     *p2 = '\0';
