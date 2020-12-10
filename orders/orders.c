@@ -14,7 +14,7 @@ void strip(char *s) {
         if(*s != '\n') {
             *p2++ = *s++;
         } else {
-            ++s;
+            s++;
         }
     }
     *p2 = '\0';
