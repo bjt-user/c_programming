@@ -1,4 +1,4 @@
-/*under construction
+/*under construction | compiler: gcc | operating system: windows
 entering data into the text file works (creates textfile if it doesn't exist)
 quitting by pressing enter at the shop_url prompt*/
 
