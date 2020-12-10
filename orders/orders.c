@@ -6,8 +6,12 @@ quitting by pressing enter at the shop_url prompt*/
 #include <stdlib.h> /*for EXIT_SUCCESS*/
 
 /*function to delete the line break from a string
-still trying to fully understand this one
-(adjusted stackoverflow paste)*/
+Computers can't delete data they can only overwrite it,
+so we make a new variable and set its adress to where
+the character '\n' starts.
+That means that the first char pointer will be smaller
+because the next variable starts at the location the
+character '\n' was previously */
 void strip(char *s) {
     char *p2 = s;
     while(*s != '\0') {
