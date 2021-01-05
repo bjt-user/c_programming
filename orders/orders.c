@@ -1,15 +1,11 @@
-/*under construction | compiler: gcc | operating system: windows
-entering data into the text file works (creates textfile if it doesn't exist)
-quitting by pressing enter at the shop_url prompt*/
-
 #include <stdio.h>
 #include <stdlib.h> /*for EXIT_SUCCESS*/
 
 /*function to delete the line break from a string
-Computers can't delete data they can only overwrite it,
+computers can't delete things they can only overwrite
 so we make a new variable and set its adress to where
-the character '\n' starts.
-That means that the first char pointer will be smaller
+the character '\n' starts
+that means that the first char pointer will be smaller
 because the next variable starts at the location the
 character '\n' was previously */
 void strip(char *s) {
@@ -17,7 +13,7 @@ void strip(char *s) {
     while(*s != '\0') {
         if(*s != '\n') {
             *p2++;
-	    *s++;
+			*s++;
         } else {
             *s++;
         }
@@ -25,7 +21,8 @@ void strip(char *s) {
     *p2 = '\0';
 }
 
-int main(void) {
+/* function to insert a record to the order table*/
+void insert(void) {
 	char shop_url[255];
 	char order_date[255];
 	FILE* table = fopen("C:\\Users\\BF\\Desktop\\Coding\\C\\orders\\orders.txt", "a");
@@ -57,5 +54,17 @@ int main(void) {
 	}
 	
 	fclose(table);
+}
+
+int main(void) {
+	char option[8];
+	printf("i to insert an order record\ns to show order table\n");
+	fgets(option, sizeof(option), stdin);
+	if (*option == 'i') {
+		insert();
+	} else {
+		return EXIT_SUCCESS;
+	}
+	
 	return EXIT_SUCCESS;
 }
