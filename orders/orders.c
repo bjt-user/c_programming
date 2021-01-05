@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h> /*for EXIT_SUCCESS*/
 
+#define SHOP_URL_MAXCHARS 20
+
 /*function to delete the line break from a string
 computers can't delete things they can only overwrite
 so we make a new variable and set its adress to where
@@ -19,6 +21,19 @@ void strip(char *s) {
         }
     }
     *p2 = '\0';
+}
+
+/*function to fill up shop_url with spaces until SHOP_URL_MAXCHARS is reached */
+void fillup(char *shop_url) {
+	int end_reached = 0;
+	for(int i = 0; i < SHOP_URL_MAXCHARS; i++) {
+		*shop_url++;
+		if (*shop_url == '\0' | end_reached == 1) {
+			*shop_url = ' ';
+			end_reached = 1;
+		}
+	}
+	*shop_url = '\0';
 }
 
 /* function to insert a record to the order table*/
@@ -45,8 +60,9 @@ void insert(void) {
 		}
 		
 		strip(shop_url);
+		fillup(shop_url);
 		strip(order_date);
-		printf("%s; ", shop_url);
+		printf("%s | ", shop_url);
 		printf("%s\n", order_date);
 		fprintf(table, "%s; ", &shop_url);
 		fprintf(table, "%s\n", &order_date);
