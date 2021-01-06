@@ -64,12 +64,50 @@ void insert(void) {
 		strip(order_date);
 		printf("%s | ", shop_url);
 		printf("%s\n", order_date);
-		fprintf(table, "%s; ", &shop_url);
-		fprintf(table, "%s\n", &order_date);
+		fprintf(table, "'%s'; ", &shop_url);
+		fprintf(table, "'%s'\n", &order_date);
 
 	}
 	
 	fclose(table);
+}
+
+void print_table(void) {
+/*read the file and convert it into a table*/
+    FILE *filePointer;
+    char ch;
+	int singlequotecounter = 0;
+
+    filePointer = fopen("C:\\Users\\BF\\Desktop\\Coding\\C\\orders\\orders.txt", "r");
+
+    if (filePointer == NULL)
+    {
+        printf("File is not available \n");
+    }
+    else
+    {
+		
+		printf("\n--------------------------------------------------\n");
+        while ((ch = fgetc(filePointer)) != EOF)
+        {
+			if (ch == '\'') {
+				singlequotecounter++;
+				if(singlequotecounter == 1) {
+					ch = fgetc(filePointer);
+				}
+			} else if (ch == '\n') {
+				printf("\n--------------------------------------------------\n");
+			}
+			if (singlequotecounter == 1) {
+				printf("%c", ch);
+			} else if (singlequotecounter == 2) {
+				singlequotecounter = 0;
+				printf("|");
+			}
+        }
+    }
+
+    fclose(filePointer);
 }
 
 int main(void) {
@@ -78,6 +116,8 @@ int main(void) {
 	fgets(option, sizeof(option), stdin);
 	if (*option == 'i') {
 		insert();
+	} else if(*option == 's') {
+		print_table();
 	} else {
 		return EXIT_SUCCESS;
 	}
